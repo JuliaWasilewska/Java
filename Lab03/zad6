@@ -1,0 +1,96 @@
+//Klasa Gracz:
+import java.util.Random;
+
+public class Gracz {
+    private int hp;
+    private Bron bron;
+    private Zbroja zbroja;
+    private String imie;
+
+    public Gracz(String imie) {
+        this.imie = imie;
+        this.hp = 100;
+    }
+
+    public void atak(Przeciwnik przeciwnik) {
+        int dmg = this.bron.getObrazenia();
+        System.out.println(this.imie + " atakuje " + przeciwnik.getImie() + " za " + dmg + " obrażeń.");
+        przeciwnik.obrona(dmg);
+    }
+
+    public void obrona(int obrazenia) {
+        int dmg = obrazenia - this.zbroja.getObrona();
+        if (dmg < 0) dmg = 0;
+        this.hp -= dmg;
+        System.out.println(this.imie + " otrzymuje " + dmg + " obrażeń.");
+        if (this.hp <= 0) {
+            System.out.println(this.imie + " zginął!");
+        }
+    }
+
+    public void wybierzBron(Bron bron) {
+        this.bron = bron;
+        System.out.println(this.imie + " wybrał broń: " + bron.getNazwa());
+    }
+
+    public void wybierzZbroje(Zbroja zbroja) {
+        this.zbroja = zbroja;
+        System.out.println(this.imie + " wybrał zbroję: " + zbroja.getNazwa());
+    }
+
+    public boolean czyZyje() {
+        return hp > 0;
+    }
+
+    public String getImie() {
+        return imie;
+    }
+}
+//Klasa przeciwnik
+import java.util.Random;
+
+public class Przeciwnik {
+    private int hp;
+    private Bron bron;
+    private Zbroja zbroja;
+    private String imie;
+
+    public Przeciwnik(String imie) {
+        this.imie = imie;
+        this.hp = 100;
+    }
+
+    public void atak(Gracz gracz) {
+        int dmg = this.bron.getObrazenia();
+        System.out.println(this.imie + " atakuje " + gracz.getImie() + " za " + dmg + " obrażeń.");
+        gracz.obrona(dmg);
+    }
+
+    public void obrona(int obrazenia) {
+        int dmg = obrazenia - this.zbroja.getObrona();
+        if (dmg < 0) dmg = 0;
+        this.hp -= dmg;
+        System.out.println(this.imie + " otrzymuje " + dmg + " obrażeń.");
+        if (this.hp <= 0) {
+            System.out.println(this.imie + " zginął!");
+        }
+    }
+
+    public void wybierzBron(Bron bron) {
+        this.bron = bron;
+        System.out.println(this.imie + " wybrał broń: " + bron.getNazwa());
+    }
+
+    public void wybierzZbroje(Zbroja zbroja) {
+        this.zbroja = zbroja;
+        System.out.println(this.imie + " wybrał zbroję: " + zbroja.getNazwa());
+    }
+
+    public boolean czyZyje() {
+        return hp > 0;
+    }
+
+    public String getImie() {
+        return imie;
+    }
+}
