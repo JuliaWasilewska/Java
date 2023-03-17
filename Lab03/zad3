@@ -1,0 +1,101 @@
+public class TV {
+    private int channel;
+    private int volume;
+    private boolean on;
+
+    public TV() {
+        this.channel = 1;
+        this.volume = 5;
+        this.on = false;
+    }
+
+    public void setChannel(int channel) {
+        if (on && channel >= 1 && channel <= 20) {
+            this.channel = channel;
+            System.out.println("Kanał zmieniony na " + channel);
+        }
+    }
+
+    public void setVolume(int volume) {
+        if (on && volume >= 1 && volume <= 10) {
+            this.volume = volume;
+            System.out.println("Głośność zmieniona na " + volume);
+        }
+    }
+
+    public void turnOn() {
+        on = true;
+        System.out.println("TV został włączony");
+    }
+
+    public void turnOff() {
+        on = false;
+        System.out.println("TV został wyłączony");
+    }
+
+    public boolean isOn() {
+        return on;
+    }
+
+    public static void main(String[] args) {
+        TV tv = new TV();
+        Remote remote = new Remote(tv);
+
+        remote.turnOn();
+        remote.changeChannelUp();
+        remote.changeVolumeUp();
+        remote.changeChannelUp();
+        remote.changeChannelUp();
+        remote.changeChannelUp();
+        remote.changeVolumeDown();
+        remote.turnOff();
+    }
+}
+
+public class Remote {
+    private TV tv;
+
+    public Remote(TV tv) {
+        this.tv = tv;
+    }
+
+    public void changeChannelUp() {
+        if (tv.isOn()) {
+            int currentChannel = tv.getChannel();
+            tv.setChannel(currentChannel + 1);
+        }
+    }
+
+    public void changeChannelDown() {
+        if (tv.isOn()) {
+            int currentChannel = tv.getChannel();
+            tv.setChannel(currentChannel - 1);
+        }
+    }
+
+    public void changeVolumeUp() {
+        if (tv.isOn()) {
+            int currentVolume = tv.getVolume();
+            tv.setVolume(currentVolume + 1);
+        }
+    }
+
+    public void changeVolumeDown() {
+        if (tv.isOn()) {
+            int currentVolume = tv.getVolume();
+            tv.setVolume(currentVolume - 1);
+        }
+    }
+
+    public void turnOnOff() {
+        if (tv.isOn()) {
+            tv.turnOff();
+        } else {
+            tv.turnOn();
+        }
+    }
+
+    public static void main(String[] args) {
+        // kod testowy
+    }
+}
