@@ -1,4 +1,4 @@
-public class Kwadrat {
+public class zad1 {
     private double bok;
 
     public Kwadrat(double bok) {
