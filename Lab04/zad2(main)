@@ -1,0 +1,17 @@
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Podaj zakres liczb (od, do): ");
+        int zakresOd = scanner.nextInt();
+        int zakresDo = scanner.nextInt();
+        Gra gra = new Gra();
+        gra.rozpocznijGre(zakresOd, zakresDo);
+        while (!gra.koniecGry()) {
+            System.out.print("Podaj liczbę: ");
+            int liczba = scanner.nextInt();
+            if (gra.zgadnijLiczbe(liczba)) {
+                break;
+            }
+        }
+    }
+}
