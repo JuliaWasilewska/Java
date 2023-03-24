@@ -1,0 +1,56 @@
+public class Ulamek {
+    private int licznik;
+    private int mianownik;
+    
+    public Ulamek(int licznik, int mianownik) {
+        if (mianownik == 0) {
+            throw new IllegalArgumentException("Mianownik nie może być równy zero.");
+        }
+        int gcd = gcd(licznik, mianownik);
+        this.licznik = licznik / gcd;
+        this.mianownik = mianownik / gcd;
+        if (this.mianownik < 0) {
+            this.licznik = -this.licznik;
+            this.mianownik = -this.mianownik;
+        }
+    }
+    
+    public Ulamek dodaj(Ulamek other) {
+        int nowyLicznik = this.licznik * other.mianownik + other.licznik * this.mianownik;
+        int nowyMianownik = this.mianownik * other.mianownik;
+        return new Ulamek(nowyLicznik, nowyMianownik);
+    }
+    
+    public Ulamek odejmij(Ulamek other) {
+        int nowyLicznik = this.licznik * other.mianownik - other.licznik * this.mianownik;
+        int nowyMianownik = this.mianownik * other.mianownik;
+        return new Ulamek(nowyLicznik, nowyMianownik);
+    }
+    
+    public Ulamek pomnoz(Ulamek other) {
+        int nowyLicznik = this.licznik * other.licznik;
+        int nowyMianownik = this.mianownik * other.mianownik;
+        return new Ulamek(nowyLicznik, nowyMianownik);
+    }
+    
+    public Ulamek podziel(Ulamek other) {
+        if (other.licznik == 0) {
+            throw new IllegalArgumentException("Nie można dzielić przez zero.");
+        }
+        int nowyLicznik = this.licznik * other.mianownik;
+        int nowyMianownik = this.mianownik * other.licznik;
+        return new Ulamek(nowyLicznik, nowyMianownik);
+    }
+    
+    public String toString() {
+        if (mianownik == 1) {
+            return Integer.toString(licznik);
+        } else {
+            return licznik + "/" + mianownik;
+        }
+    }
+    
+    private int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+}
