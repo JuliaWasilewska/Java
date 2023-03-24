@@ -24,3 +24,20 @@ public enum Figura {
         return opis;
     }
 }
+public enum Kolor {
+    KIER("Kier"),
+    KARO("Karo"),
+    TREFL("Trefl"),
+    PIK("Pik");
+
+    private final String opis;
+
+    Kolor(String opis) {
+        this.opis = opis;
+    }
+
+    @Override
+    public String toString() {
+        return opis;
+    }
+}
