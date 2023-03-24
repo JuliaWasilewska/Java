@@ -19,7 +19,7 @@ public enum Figura {
         this.opis = opis;
     }
 
- 
+    @Override
     public String toString() {
         return opis;
     }
