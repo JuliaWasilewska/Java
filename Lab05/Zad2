@@ -1,0 +1,52 @@
+public class Shop {
+    protected String address;
+    protected int size;
+
+    public Shop(String address, int size) {
+        this.address = address;
+        this.size = size;
+    }
+
+    public String getInformation() {
+        return "Address: " + address + ", Size: " + size;
+    }
+}
+
+public class Bookshop extends Shop {
+    private String[] products = {"The Great Gatsby", "To Kill a Mockingbird", "1984"};
+
+    public Bookshop(String address, int size) {
+        super(address, size);
+    }
+
+    @Override
+    public String getInformation() {
+        return super.getInformation() + ", Products: " + String.join(", ", products);
+    }
+}
+
+public class Bakery extends Shop {
+    private String[] products = {"Croissants", "Baguettes", "Pain au chocolat"};
+
+    public Bakery(String address, int size) {
+        super(address, size);
+    }
+
+    @Override
+    public String getInformation() {
+        return super.getInformation() + ", Products: " + String.join(", ", products);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shop genericShop = new Shop("123 Main St", 1000);
+        System.out.println(genericShop.getInformation());
+
+        Bookshop bookshop = new Bookshop("456 Bookstore Blvd", 500);
+        System.out.println(bookshop.getInformation());
+
+        Bakery bakery = new Bakery("789 Pastry Pl", 750);
+        System.out.println(bakery.getInformation());
+    }
+}
