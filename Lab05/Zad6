@@ -1,0 +1,22 @@
+public class Calculator {
+    public double calculate(double base, double exponent) {
+        return Math.pow(base, exponent);
+    }
+
+    public double calculate(double a, double b, char operator) {
+        if (operator == '*') {
+            return a * b;
+        } else {
+            throw new IllegalArgumentException("Invalid operator: " + operator);
+        }
+    }
+
+    public double calculate(double a, double b, double c) {
+        return a + b + c;
+    }
+}
+Calculator calculator = new Calculator();
+
+double result1 = calculator.calculate(2, 3); // 8.0
+double result2 = calculator.calculate(4, 5, '*'); // 20.0
+double result3 = calculator.calculate(1, 2, 3); // 6.0
