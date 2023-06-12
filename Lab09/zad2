@@ -1,0 +1,51 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class MojaMapa<K, V> {
+    private Map<K, V> mapa;
+    private int pojemnosc;
+
+    public MojaMapa(int pojemnosc) {
+        this.pojemnosc = pojemnosc;
+        this.mapa = new HashMap<>();
+    }
+
+    public boolean dodaj(K klucz, V wartość) {
+        if (mapa.size() < pojemnosc) {
+            mapa.put(klucz, wartość);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean czyZawiera(K klucz) {
+        return mapa.containsKey(klucz);
+    }
+
+    public int wielkość() {
+        return mapa.size();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MojaMapa<Integer, String> mapa1 = new MojaMapa<>(3);
+        mapa1.dodaj(1, "A");
+        mapa1.dodaj(2, "B");
+        mapa1.dodaj(3, "C");
+
+        System.out.println("Czy mapa zawiera klucz 2? " + mapa1.czyZawiera(2));
+        System.out.println("Wielkość mapy: " + mapa1.wielkość());
+
+        mapa1.dodaj(2, "D");
+        System.out.println("Czy mapa zawiera klucz 2 po nadpisaniu? " + mapa1.czyZawiera(2));
+
+        MojaMapa<String, String> mapa2 = new MojaMapa<>(2);
+        mapa2.dodaj("a", "apple");
+        mapa2.dodaj("b", "banana");
+
+        System.out.println("Czy mapa zawiera klucz 'c'? " + mapa2.czyZawiera("c"));
+        System.out.println("Wielkość mapy: " + mapa2.wielkość());
+    }
+}
