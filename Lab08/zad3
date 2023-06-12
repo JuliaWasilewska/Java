@@ -1,0 +1,51 @@
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.HashMap;
+import java.util.Map;
+
+public class DirectoryAnalyzer {
+    public static void main(String[] args) {
+        String basedirPath = "basedir"; // Ścieżka do katalogu bazowego
+
+        // Tworzenie obiektu licznika plików dla poszczególnych katalogów
+        Map<String, Integer> fileCountMap = new HashMap<>();
+
+        try {
+            Files.walkFileTree(Paths.get(basedirPath), new SimpleFileVisitor<>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    // Pobieranie ścieżki katalogu dla aktualnego pliku
+                    String directory = file.getParent().toString();
+
+                    // Zwiększanie licznika plików dla danego katalogu
+                    fileCountMap.put(directory, fileCountMap.getOrDefault(directory, 0) + 1);
+
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+
+            // Wyszukiwanie katalogu z największą liczbą plików
+            int maxFileCount = 0;
+            String directoryWithMaxFiles = "";
+
+            for (Map.Entry<String, Integer> entry : fileCountMap.entrySet()) {
+                if (entry.getValue() > maxFileCount) {
+                    maxFileCount = entry.getValue();
+                    directoryWithMaxFiles = entry.getKey();
+                }
+            }
+
+            // Wyświetlanie wyników
+            if (!directoryWithMaxFiles.isEmpty()) {
+                System.out.println("Katalog z największą liczbą plików: " + directoryWithMaxFiles);
+                System.out.println("Liczba plików: " + maxFileCount);
+            } else {
+                System.out.println("Brak katalogów w podanym katalogu bazowym.");
+            }
+        } catch (IOException e) {
+            System.out.println("Wystąpił błąd podczas analizy katalogów.");
+            e.printStackTrace();
+        }
+    }
+}
