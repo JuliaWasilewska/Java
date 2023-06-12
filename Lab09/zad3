@@ -1,0 +1,50 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Slownik {
+    private Map<String, String> slownik;
+
+    public Slownik() {
+        this.slownik = new HashMap<>();
+    }
+
+    public void wczytajSlownik(File file) {
+        try {
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String linia = scanner.nextLine();
+                String[] slowa = linia.split("->");
+
+                if (slowa.length == 2) {
+                    String slowoPolskie = slowa[0].trim();
+                    String slowoAngielskie = slowa[1].trim();
+
+                    slownik.put(slowoPolskie, slowoAngielskie);
+                }
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String przetlumacz(String slowoPolskie) {
+        return slownik.getOrDefault(slowoPolskie, "Brak tłumaczenia");
+    }
+
+    public static void main(String[] args) {
+        Slownik slownik = new Slownik();
+        File plik = new File("sciezka/do/pliku.txt");
+
+        slownik.wczytajSlownik(plik);
+
+        System.out.println("Tłumaczenie dla 'dom': " + slownik.przetlumacz("dom"));
+        System.out.println("Tłumaczenie dla 'pies': " + slownik.przetlumacz("pies"));
+        System.out.println("Tłumaczenie dla 'samochód': " + slownik.przetlumacz("samochód"));
+    }
+}
