@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class MojaLista<E> {
+    private List<E> lista;
+    private int pojemnosc;
+
+    public MojaLista(int pojemnosc) {
+        this.pojemnosc = pojemnosc;
+        this.lista = new ArrayList<>();
+    }
+
+    public boolean dodaj(E element) {
+        if (lista.size() < pojemnosc) {
+            lista.add(element);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean czyZawiera(E element) {
+        return lista.contains(element);
+    }
+
+    public int zwrocIndeks(E element) {
+        return lista.indexOf(element);
+    }
+
+    public int zwrocOstatniIndeks(E element) {
+        return lista.lastIndexOf(element);
+    }
+
+    public E zwrocElement(int indeks) {
+        if (indeks >= 0 && indeks < lista.size()) {
+            return lista.get(indeks);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean podmienElement(int indeks, E element) {
+        if (indeks >= 0 && indeks < lista.size()) {
+            lista.set(indeks, element);
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MojaLista<String> listaStringow = new MojaLista<>(5);
+        listaStringow.dodaj("A");
+        listaStringow.dodaj("B");
+        listaStringow.dodaj("C");
+        listaStringow.dodaj("A");
+        listaStringow.dodaj("D");
+
+        System.out.println("Czy lista zawiera element 'B'? " + listaStringow.czyZawiera("B"));
+        System.out.println("Indeks pierwszego wystąpienia elementu 'A': " + listaStringow.zwrocIndeks("A"));
+        System.out.println("Indeks ostatniego wystąpienia elementu 'A': " + listaStringow.zwrocOstatniIndeks("A"));
+        System.out.println("Element na indeksie 2: " + listaStringow.zwrocElement(2));
+
+        listaStringow.podmienElement(1, "E");
+        System.out.println("Element na indeksie 1 po podmianie: " + listaStringow.zwrocElement(1));
+
+        MojaLista<Integer> listaLiczb = new MojaLista<>(3);
+        listaLiczb.dodaj(10);
+        listaLiczb.dodaj(20);
+        listaLiczb.dodaj(30);
+
+        System.out.println("Czy lista zawiera element 15? " + listaLiczb.czyZawiera(15));
+        System.out.println("Indeks pierwszego wystąpienia elementu 20: " + listaLiczb.zwrocIndeks(20));
+        System.out.println("Indeks ostatniego wystąpienia elementu 20: " + listaLiczb.zwrocOstatniIndeks(20));
+        System.out.println("Element na indeksie 1: " + listaLiczb.zwrocElement(1));
+
+        listaLiczb.podmienElement(2, 40);
+        System.out.println("Element na indeksie 2 po podmianie: " + listaLiczb.zwrocElement(2));
+    }
+}
