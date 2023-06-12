@@ -1,0 +1,31 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class SumEverySecondLine {
+    public static void main(String[] args) {
+        String filePath = "Input.txt"; // Ścieżka do pliku tekstowego
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            int lineCount = 0;
+            int sum = 0;
+
+            while ((line = reader.readLine()) != null) {
+                lineCount++;
+                if (lineCount % 2 == 0) {
+                    int number = Integer.parseInt(line);
+                    sum += number;
+                }
+            }
+
+            System.out.println("Suma co drugiej linii: " + sum);
+        } catch (IOException e) {
+            System.out.println("Wystąpił błąd podczas wczytywania pliku.");
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Błąd podczas konwersji liczby.");
+            e.printStackTrace();
+        }
+    }
+}
