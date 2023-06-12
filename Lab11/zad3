@@ -1,0 +1,61 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class ReverseString extends JFrame {
+    private JTextField inputTextField;
+    private JButton reverseButton;
+    private JLabel resultLabel;
+
+    public ReverseString() {
+        setTitle("Reverse String");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 200);
+        setLocationRelativeTo(null);
+
+        initComponents();
+    }
+
+    private void initComponents() {
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+
+        inputTextField = new JTextField(20);
+
+        reverseButton = new JButton("Reverse");
+        reverseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reverseString();
+            }
+        });
+
+        resultLabel = new JLabel();
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.add(inputTextField);
+        inputPanel.add(reverseButton);
+
+        mainPanel.add(inputPanel, BorderLayout.NORTH);
+        mainPanel.add(resultLabel, BorderLayout.CENTER);
+
+        add(mainPanel);
+    }
+
+    private void reverseString() {
+        String input = inputTextField.getText();
+        StringBuilder reversed = new StringBuilder(input).reverse();
+        resultLabel.setText(reversed.toString());
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                ReverseString reverseString = new ReverseString();
+                reverseString.setVisible(true);
+            }
+        });
+    }
+}
