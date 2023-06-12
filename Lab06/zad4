@@ -1,0 +1,69 @@
+class Czas {
+    private int godziny;
+    private int minuty;
+
+    public Czas(int godziny, int minuty) {
+        this.godziny = godziny;
+        this.minuty = minuty;
+    }
+
+    @Override
+    public String toString() {
+        return godziny + "h " + minuty + "min";
+    }
+
+    public Czas dodaj(Czas t) {
+        int sumaGodzin = godziny + t.godziny;
+        int sumaMinut = minuty + t.minuty;
+
+        if (sumaMinut >= 60) {
+            sumaGodzin += sumaMinut / 60;
+            sumaMinut = sumaMinut % 60;
+        }
+
+        return new Czas(sumaGodzin, sumaMinut);
+    }
+
+    public Czas odejmij(Czas t) {
+        int roznicaGodzin = godziny - t.godziny;
+        int roznicaMinut = minuty - t.minuty;
+
+        if (roznicaMinut < 0) {
+            roznicaGodzin--;
+            roznicaMinut += 60;
+        }
+
+        return new Czas(roznicaGodzin, roznicaMinut);
+    }
+
+    public Czas pomnoz(int krotnosc) {
+        int pomnozoneGodziny = godziny * krotnosc;
+        int pomnozoneMinuty = minuty * krotnosc;
+
+        if (pomnozoneMinuty >= 60) {
+            pomnozoneGodziny += pomnozoneMinuty / 60;
+            pomnozoneMinuty = pomnozoneMinuty % 60;
+        }
+
+        return new Czas(pomnozoneGodziny, pomnozoneMinuty);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Czas czas1 = new Czas(3, 45);
+        Czas czas2 = new Czas(1, 30);
+
+        System.out.println("Czas 1: " + czas1.toString());
+        System.out.println("Czas 2: " + czas2.toString());
+
+        Czas suma = czas1.dodaj(czas2);
+        System.out.println("Suma: " + suma.toString());
+
+        Czas roznica = czas1.odejmij(czas2);
+        System.out.println("Różnica: " + roznica.toString());
+
+        Czas pomnozonyCzas = czas1.pomnoz(2);
+        System.out.println("Pomnożony czas: " + pomnozonyCzas.toString());
+    }
+}
