@@ -1,0 +1,77 @@
+enum Czas {
+    DZIEN,
+    MIESIAC(20),
+    ROK;
+
+    private final int dniWMiesiacu;
+
+    Czas() {
+        this.dniWMiesiacu = 30;
+    }
+
+    Czas(int dniWMiesiacu) {
+        this.dniWMiesiacu = dniWMiesiacu;
+    }
+
+    public int getDniWMiesiacu() {
+        return dniWMiesiacu;
+    }
+}
+
+class Pracownik {
+    private String imie;
+    private String nazwisko;
+    private double dzienneWynagrodzenie;
+
+    public Pracownik(String imie, String nazwisko, double dzienneWynagrodzenie) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.dzienneWynagrodzenie = dzienneWynagrodzenie;
+    }
+
+    public double obliczMiesieczneWynagrodzenie() {
+        return dzienneWynagrodzenie * Czas.MIESIAC.getDniWMiesiacu();
+    }
+}
+
+class Firma {
+    private Pracownik[] pracownicy;
+
+    public Firma(Pracownik[] pracownicy) {
+        this.pracownicy = pracownicy;
+    }
+
+    public double obliczMiesiecznyKosztFirmy() {
+        double koszt = 0;
+        for (Pracownik pracownik : pracownicy) {
+            koszt += pracownik.obliczMiesieczneWynagrodzenie();
+        }
+        return koszt;
+    }
+
+    public double obliczRocznyKosztFirmy() {
+        return obliczMiesiecznyKosztFirmy() * Czas.ROK.getDniWMiesiacu();
+    }
+
+    public double obliczKosztFirmy(Czas czas, int krotnosc) {
+        return obliczMiesiecznyKosztFirmy() * czas.getDniWMiesiacu() * krotnosc;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Pracownik pracownik1 = new Pracownik("Jan", "Kowalski", 100);
+        Pracownik pracownik2 = new Pracownik("Anna", "Nowak", 150);
+        Pracownik[] pracownicy = {pracownik1, pracownik2};
+
+        Firma firma = new Firma(pracownicy);
+
+        double miesiecznyKoszt = firma.obliczMiesiecznyKosztFirmy();
+        double rocznyKoszt = firma.obliczRocznyKosztFirmy();
+        double kosztNa6Miesiecy = firma.obliczKosztFirmy(Czas.MIESIAC, 6);
+
+        System.out.println("Miesięczny koszt firmy: " + miesiecznyKoszt);
+        System.out.println("Roczny koszt firmy: " + rocznyKoszt);
+        System.out.println("Koszt firmy przez 6 miesięcy: " + kosztNa6Miesiecy);
+    }
+}
