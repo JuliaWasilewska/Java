@@ -1,0 +1,80 @@
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class FileProcessor {
+    public static void main(String[] args) {
+        String inboundDirPath = "inbound"; // Ścieżka do katalogu inbound
+        String outboundDirPath = "outbound"; // Ścieżka do katalogu outbound
+
+        try {
+            // Tworzenie katalogu outbound, jeśli nie istnieje
+            Files.createDirectories(Paths.get(outboundDirPath));
+
+            // Przetwarzanie plików w katalogu inbound
+            Files.walkFileTree(Paths.get(inboundDirPath), new SimpleFileVisitor<>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    // Odczytywanie treści pliku
+                    String content = Files.readString(file);
+
+                    // Zamiana spacji na podkreślenie
+                    content = content.replace(" ", "_");
+
+                    // Przesunięcie liter o trzy pozycje w alfabecie
+                    content = shiftLetters(content, 3);
+
+                    // Generowanie nazwy pliku dla katalogu outbound
+                    String fileName = generateOutboundFileName(file);
+
+                    // Tworzenie ścieżki dla pliku w katalogu outbound
+                    Path targetPath = Paths.get(outboundDirPath, fileName);
+
+                    // Zapisywanie przetworzonej treści do pliku w katalogu outbound
+                    Files.write(targetPath, content.getBytes());
+
+                    // Usuwanie pliku z katalogu inbound
+                    Files.delete(file);
+
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+
+            System.out.println("Przetwarzanie plików zakończone.");
+        } catch (IOException e) {
+            System.out.println("Wystąpił błąd podczas przetwarzania plików.");
+            e.printStackTrace();
+        }
+    }
+
+    private static String shiftLetters(String text, int shift) {
+        StringBuilder result = new StringBuilder();
+
+        for (char c : text.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char shiftedChar = (char) (c + shift);
+                if ((Character.isUpperCase(c) && shiftedChar > 'Z') ||
+                        (Character.isLowerCase(c) && shiftedChar > 'z')) {
+                    shiftedChar -= 26;
+                }
+                result.append(shiftedChar);
+            } else {
+                result.append(c);
+            }
+        }
+
+        return result.toString();
+    }
+
+    private static String generateOutboundFileName(Path file) {
+        String fileName = file.getFileName().toString();
+        String extension = fileName.substring(fileName.lastIndexOf('.'));
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+        String timestamp = currentTime.format(formatter);
+
+        return fileName.replace(extension, "") + "_" + timestamp + ".out";
+    }
+}
