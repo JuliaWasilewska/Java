@@ -1,0 +1,21 @@
+public class Main {
+    public static String usunElementy(String[] slowa, int coN) {
+        StringBuilder wynik = new StringBuilder();
+
+        for (int i = 0; i < slowa.length; i++) {
+            if ((i + 1) % coN != 0) {
+                wynik.append(slowa[i]).append(" ");
+            }
+        }
+
+        return wynik.toString().trim();
+    }
+
+    public static void main(String[] args) {
+        String[] slowa = {"Ala", "nie", "ma", "test", "kota", "i", "psa", "papugę"};
+        int coN = 2;
+
+        String wynik = usunElementy(slowa, coN);
+        System.out.println(wynik);
+    }
+}
