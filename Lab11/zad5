@@ -1,0 +1,62 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class DayOfWeekChecker extends JFrame {
+    private JTextField dateTextField;
+    private JButton checkButton;
+    private JLabel resultLabel;
+
+    public DayOfWeekChecker() {
+        setTitle("Day of Week Checker");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 200);
+        setLocationRelativeTo(null);
+
+        initComponents();
+    }
+
+    private void initComponents() {
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+
+        dateTextField = new JTextField();
+        checkButton = new JButton("Check");
+        resultLabel = new JLabel();
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.add(new JLabel("Enter date (yyyy-MM-dd):"));
+        inputPanel.add(dateTextField);
+        inputPanel.add(checkButton);
+
+        mainPanel.add(inputPanel, BorderLayout.NORTH);
+        mainPanel.add(resultLabel, BorderLayout.CENTER);
+
+        checkButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String dateStr = dateTextField.getText();
+                LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ISO_DATE);
+                DayOfWeek dayOfWeek = date.getDayOfWeek();
+                String result = dayOfWeek.toString();
+                resultLabel.setText("Day of week: " + result);
+            }
+        });
+
+        add(mainPanel);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                DayOfWeekChecker checker = new DayOfWeekChecker();
+                checker.setVisible(true);
+            }
+        });
+    }
+}
