@@ -1,0 +1,25 @@
+import java.time.LocalDate;
+
+public class LeapYearGenerator {
+    public static void main(String[] args) {
+        LocalDate currentDate = LocalDate.now();
+        int currentYear = currentDate.getYear();
+
+        int count = 0;
+        int year = currentYear;
+
+        System.out.println("Następne 100 roczników przestępnych:");
+
+        while (count < 100) {
+            if (isLeapYear(year)) {
+                System.out.println(year);
+                count++;
+            }
+            year++;
+        }
+    }
+
+    private static boolean isLeapYear(int year) {
+        return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+    }
+}
