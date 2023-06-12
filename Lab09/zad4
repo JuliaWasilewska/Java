@@ -95,3 +95,5 @@ public class Main {
         }
     }
 }
+
+//Dzięki tym klasom i sortowaniu za pomocą różnych komparatorów możemy sortować listę zawodników według różnych kryteriów, takich jak imię, numer czy predkoscMax.
