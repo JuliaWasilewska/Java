@@ -21,3 +21,5 @@ public class Main {
         return wystapienia;
     }
 }
+//Metoda dzieli tekst na słowa, ignorując białe znaki, a następnie zlicza wystąpienia poszczególnych słów. Wykorzystuje mapę, gdzie kluczem jest słowo, a wartością jest liczba wystąpień tego słowa. Dla każdego słowa sprawdzamy, czy jest już obecne w mapie. Jeśli tak, zwiększamy wartość o 1. 
+//Jeśli nie, dodajemy je do mapy z wartością 1. Na koniec zwracamy mapę zliczeń.
