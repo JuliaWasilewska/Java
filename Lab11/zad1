@@ -1,0 +1,66 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CelsiusToFahrenheitConverter extends JFrame {
+    private JTextField celsiusTextField;
+    private JLabel fahrenheitLabel;
+
+    public CelsiusToFahrenheitConverter() {
+        setTitle("Celsius to Fahrenheit Converter");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 200);
+        setLocationRelativeTo(null);
+
+        initComponents();
+    }
+
+    private void initComponents() {
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+
+        JLabel celsiusLabel = new JLabel("Celsius:");
+        celsiusTextField = new JTextField(10);
+
+        JButton convertButton = new JButton("Convert");
+        convertButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                convertCelsiusToFahrenheit();
+            }
+        });
+
+        fahrenheitLabel = new JLabel("Fahrenheit: ");
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.add(celsiusLabel);
+        inputPanel.add(celsiusTextField);
+        inputPanel.add(convertButton);
+
+        mainPanel.add(inputPanel, BorderLayout.NORTH);
+        mainPanel.add(fahrenheitLabel, BorderLayout.CENTER);
+
+        add(mainPanel);
+    }
+
+    private void convertCelsiusToFahrenheit() {
+        try {
+            double celsius = Double.parseDouble(celsiusTextField.getText());
+            double fahrenheit = (celsius * 9 / 5) + 32;
+            fahrenheitLabel.setText("Fahrenheit: " + fahrenheit);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid input! Please enter a valid number.");
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                CelsiusToFahrenheitConverter converter = new CelsiusToFahrenheitConverter();
+                converter.setVisible(true);
+            }
+        });
+    }
+}
