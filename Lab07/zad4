@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class TextAnalyzer {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Podaj tekst: ");
+        String text = scanner.nextLine();
+
+        printStatistics(text);
+
+        scanner.close();
+    }
+
+    public static void printStatistics(String text) {
+        int letterCount = 0;
+        int vowelCount = 0;
+        int consonantCount = 0;
+        int whitespaceCount = 0;
+        int digitCount = 0;
+        int otherCount = 0;
+
+        text = text.toLowerCase(); // Zamień tekst na małe litery dla łatwiejszej analizy
+
+        for (char ch : text.toCharArray()) {
+            if (Character.isLetter(ch)) {
+                letterCount++;
+                if (isVowel(ch)) {
+                    vowelCount++;
+                } else {
+                    consonantCount++;
+                }
+            } else if (Character.isWhitespace(ch)) {
+                whitespaceCount++;
+            } else if (Character.isDigit(ch)) {
+                digitCount++;
+            } else {
+                otherCount++;
+            }
+        }
+
+        System.out.println("Podany tekst \"" + text + "\" zawiera:");
+        System.out.println(letterCount + " liter, w tym " + vowelCount + " samogłosek oraz " + consonantCount + " spółgłosek");
+        System.out.println(whitespaceCount + " białych znaków");
+        System.out.println(digitCount + " liczb");
+        System.out.println(otherCount + " innych znaków");
+    }
+
+    public static boolean isVowel(char ch) {
+        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+    }
+}
