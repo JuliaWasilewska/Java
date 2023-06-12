@@ -1,0 +1,23 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class Main {
+    public static void main(String[] args) {
+        String tekst = "Ala ma kota, kot ma Alę";
+
+        Map<String, Integer> wystapienia = zliczWystapieniaSlow(tekst);
+        System.out.println(wystapienia);
+    }
+
+    public static Map<String, Integer> zliczWystapieniaSlow(String tekst) {
+        Map<String, Integer> wystapienia = new HashMap<>();
+        
+        String[] slowa = tekst.split("\\s+");
+
+        for (String slowo : slowa) {
+            wystapienia.put(slowo, wystapienia.getOrDefault(slowo, 0) + 1);
+        }
+
+        return wystapienia;
+    }
+}
