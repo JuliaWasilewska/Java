@@ -1,0 +1,51 @@
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class TimeZoneConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Podaj godzinę (HH:mm) w Polsce:");
+        String timeInput = scanner.nextLine();
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDateTime inputDateTime = LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern("HH:mm"));
+
+        ZoneId polandZone = ZoneId.of("Europe/Warsaw");
+        ZoneId selectedZone = selectTimeZone(scanner);
+
+        ZonedDateTime polandZonedDateTime = ZonedDateTime.of(localDateTime, polandZone);
+        ZonedDateTime selectedZonedDateTime = polandZonedDateTime.withZoneSameInstant(selectedZone);
+
+        LocalDateTime convertedDateTime = selectedZonedDateTime.toLocalDateTime();
+
+        System.out.println("Przeliczona godzina w wybranym kraju/mieście:");
+        System.out.println(convertedDateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+    }
+
+    private static ZoneId selectTimeZone(Scanner scanner) {
+        System.out.println("Wybierz kraj/miasto:");
+        System.out.println("1. Nowy Jork");
+        System.out.println("2. Sydney");
+        System.out.println("3. Tokio");
+        System.out.print("Wybór: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 1:
+                return ZoneId.of("America/New_York");
+            case 2:
+                return ZoneId.of("Australia/Sydney");
+            case 3:
+                return ZoneId.of("Asia/Tokyo");
+            default:
+                return ZoneOffset.UTC;
+        }
+    }
+}
