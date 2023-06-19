@@ -1,112 +1,13 @@
+package ProjektJava;
+
 import java.util.*;
-
-class Product {
-    private String name;
-    private double price;
-    private int quantity;
-
-    public Product(String name, double price, int quantity) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-}
-
-class Inventory {
-    private List<Product> products;
-
-    public Inventory() {
-        products = new ArrayList<>();
-    }
-
-    public void addProduct(Product product) {
-        products.add(product);
-    }
-
-    public void displayProducts() {
-        System.out.println("Available products:");
-        for (int i = 0; i < products.size(); i++) {
-            Product product = products.get(i);
-            System.out.println((i + 1) + ". " + product.getName() + " - $" + product.getPrice());
-        }
-    }
-
-    public void sortProductsByName() {
-        Collections.sort(products, Comparator.comparing(Product::getName));
-        System.out.println("Products sorted by name.");
-    }
-
-    public Product getProduct(int productNumber) {
-        if (productNumber >= 1 && productNumber <= products.size()) {
-            return products.get(productNumber - 1);
-        }
-        return null;
-    }
-}
-
-class ShoppingCart {
-    private Map<Product, Integer> products;
-
-    public ShoppingCart() {
-        products = new HashMap<>();
-    }
-
-    public void addProduct(Product product, int quantity) {
-        if (products.containsKey(product)) {
-            int currentQuantity = products.get(product);
-            products.put(product, currentQuantity + quantity);
-        } else {
-            products.put(product, quantity);
-        }
-    }
-
-    public void removeProduct(Product product, int quantity) {
-        if (products.containsKey(product)) {
-            int currentQuantity = products.get(product);
-            if (currentQuantity <= quantity) {
-                products.remove(product);
-            } else {
-                products.put(product, currentQuantity - quantity);
-            }
-        }
-    }
-
-    public void displayCart() {
-        if (products.isEmpty()) {
-            System.out.println("Shopping cart is empty.");
-        } else {
-            System.out.println("Shopping cart:");
-            for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-                Product product = entry.getKey();
-                int quantity = entry.getValue();
-                System.out.println(product.getName() + " - $" + product.getPrice() + " x " + quantity);
-            }
-        }
-    }
-}
 
 public class OnlineStore {
     public static void main(String[] args) {
         Inventory inventory = new Inventory();
         ShoppingCart cart = new ShoppingCart();
 
-        // Dodaj 20 różnych produktów
+
         Product product1 = new Product("Koszulka", 29.99, 10);
         Product product2 = new Product("Spodnie", 49.99, 5);
         Product product3 = new Product("Buty", 99.99, 3);
@@ -233,23 +134,5 @@ public class OnlineStore {
                     break;
             }
         }
-    }
-}
-
-class User {
-    private String username;
-    private String password;
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

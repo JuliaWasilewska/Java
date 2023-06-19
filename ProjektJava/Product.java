@@ -1,3 +1,5 @@
+package ProjektJava;
+
 class Product {
     private String name;
     private double price;

@@ -1,3 +1,5 @@
+package ProjektJava;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,5 +42,4 @@ class ShoppingCart {
             }
         }
     }
-}
 }
