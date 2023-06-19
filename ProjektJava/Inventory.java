@@ -3,7 +3,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Inventory {
+class Inventory {
     private List<Product> products;
 
     public Inventory() {
