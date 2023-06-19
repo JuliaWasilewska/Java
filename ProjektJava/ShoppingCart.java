@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class ShoppingCart {
+class ShoppingCart {
     private Map<Product, Integer> products;
 
     public ShoppingCart() {
@@ -40,4 +40,5 @@ public class ShoppingCart {
             }
         }
     }
+}
 }
