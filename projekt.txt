@@ -1,0 +1,24 @@
+Każdy ze studentów wybiera jeden temat projektu i realizuje go samodzielnie. 
+Oddanie projektów na ostatnich zajęciach w formie mini obrony. 
+Maksymalna liczba punktów za projekt to 30pkt na 100pkt możliwych do zdobycia w całym semestrze. 
+
+1. System zarządzania biblioteką: Stwórz aplikację, która umożliwi zarządzanie książkami w bibliotece. Umożliw użytkownikom dodawanie, usuwanie i wyszukiwanie książek, a także tworzenie listy ulubionych książek.
+2. Symulator gry w kółko i krzyżyk: Stwórz prostą grę w kółko i krzyżyk, w której użytkownik może grać z komputerem. Zaimplementuj logikę gry oraz interakcję z użytkownikiem.
+3. System zarządzania sklepem internetowym: Zaprojektuj system, który umożliwi zarządzanie sklepem internetowym. Umożliw użytkownikom przeglądanie produktów, dodawanie ich do koszyka, składanie zamówień oraz zarządzanie stanem magazynowym.
+4. Aplikacja do zarządzania notatkami: Stwórz aplikację, która pozwoli użytkownikom tworzyć, edytować i przechowywać notatki. Umożliw też organizowanie notatek w różne kategorie oraz wyszukiwanie po kluczowych słowach.
+5. System rezerwacji sal konferencyjnych: Zaplanuj system, który umożliwi rezerwację sal konferencyjnych. Użytkownicy będą mogli przeglądać dostępne terminy, rezerwować sale oraz anulować rezerwacje.
+6. Gra w wisielca: Stwórz prostą grę w wisielca, w której użytkownik będzie zgadywał litery, a komputer będzie generował losowe słowo. Zaimplementuj mechanizm sprawdzający poprawność zgadywanych liter.
+7. System zarządzania studentami: Stwórz system, który umożliwi zarządzanie informacjami o studentach. Umożliw dodawanie, usuwanie i edytowanie danych studentów, a także generowanie raportów na podstawie różnych kryteriów.
+8. System rejestracji studentów na kursy: Zaplanuj system, który umożliwi studentom rejestrację na kursy. Użytkownicy będą mogli przeglądać dostępne kursy, zapisywać się na nie oraz sprawdzać swoje harmonogramy zajęć.
+
+
+Wymagania: 
+- Wykorzystanie obiektowego podejścia: Projekt powinien być oparty na paradygmacie programowania obiektowego, z wykorzystaniem klas, obiektów, dziedziczenia, polimorfizmu itp.
+- Struktura projektu: Projekt powinien być podzielony na logiczne moduły, klasy i pakietu. Zachowaj czytelność i dobre praktyki organizacji kodu.
+- Interakcja z użytkownikiem: Projekt powinien uwzględniać interakcję z użytkownikiem, na przykład poprzez konsolę tekstową lub interfejs graficzny.
+- Obsługa błędów: Projekt powinien zawierać obsługę błędów i wyjątków, aby zapewnić poprawne działanie programu i informowanie użytkownika o ewentualnych problemach.
+- Funkcjonalność: Projekt powinien spełniać podstawowe wymagania funkcjonalne związane z tematem, na przykład dodawanie, usuwanie, edycja danych, wyszukiwanie, generowanie raportów itp.
+- Czystość kodu i dobre praktyki programistyczne: Projekt powinien być napisany zgodnie z zasadami czystego kodu i dobrymi praktykami programistycznymi, takimi jak nazewnictwo zrozumiałe dla innych programistów, unikanie nadmiernie skomplikowanego kodu, odpowiednie formatowanie itp.
+- Optymalizacja i wydajność: Należy zwrócić uwagę na optymalizację kodu i dbałość o wydajność programu, na przykład poprzez zastosowanie odpowiednich struktur danych i algorytmów.
+- Kreatywność i innowacyjność: Zachęcamy do wniesienia własnych pomysłów i rozwiązań, które dodadzą wartość projektowi i pokażą umiejętności twórcze.
+- Jako rozwinięcie można zastosować wzorce projektowe (do doczytania we własnym zakresie).
